@@ -27,8 +27,7 @@ function AuthProvider({ children }: AuthProviderType) {
 
 	async function session({ email, password }: LoginType) {
 		try {
-			// const res = await api.post("/users/session", { email, password });
-			const res = await axios.post("/users/session", { email, password });
+			const res = await api.post("/users/session", { email, password });
 			const { user, token } = res.data;
 
 			localStorage.setItem("@TODO:user", JSON.stringify(user));

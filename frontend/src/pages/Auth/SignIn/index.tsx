@@ -17,7 +17,7 @@ export function SignIn() {
 			session({ email, password });
 			navigate("/");
 		} catch (error) {
-			alert(e);
+			alert("Erro ao realizar login. Por favor, tente novamente.");
 		}
 	}
 
@@ -61,11 +61,7 @@ export function SignIn() {
 						/>
 					</div>
 					<div>
-						<Button
-							type="submit"
-							className="w-full"
-							onChange={() => handleSubmit}
-						>
+						<Button type="submit" className="w-full" onClick={handleSubmit}>
 							Iniciar sessão
 						</Button>
 					</div>
