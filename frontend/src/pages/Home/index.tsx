@@ -31,17 +31,18 @@ export function Home() {
 		<div className="w-full flex items-center justify-center ">
 			<div className="flex justify-center items-center h-screen">
 				<Card className="w-[35.875rem] h-[40rem] flex flex-col">
-					<CardHeader>
-						<CardTitle>Create project</CardTitle>
-						<CardDescription>
-							Deploy your new project in one-click.
-						</CardDescription>
+					<CardHeader className="flex items-center">
+						<CardTitle className="text-[20px] font-serif">
+							Create notes
+						</CardTitle>
 					</CardHeader>
 
 					<CardContent className="flex-1">
 						<form className="w-full h-auto">
-							<div className="grid w-full items-center gap-4 flex-col">
-								<Label htmlFor="name">Qual a sua anotação para hoje?</Label>
+							<div className="grid w-full items-center gap-4 flex-col rounded-sm">
+								<Label htmlFor="name" className="font-bold">
+									Qual a sua anotação para hoje?
+								</Label>
 								<div className="flex w-[100%] gap-2">
 									<Input
 										id="name"
@@ -54,7 +55,7 @@ export function Home() {
 									</Button>
 								</div>
 								<section className="flex flex-col h-[20rem] gap-2 overflow-y-auto p-2 ">
-									<div className="flex w-full gap-1">
+									{/* <div className="flex w-full gap-1">
 										<Badge className="w-full">Bom dia</Badge>
 										<section className="flex gap-1">
 											<Button type="button" variant="default">
@@ -64,7 +65,7 @@ export function Home() {
 												<OctagonX />
 											</Button>
 										</section>
-									</div>
+									</div> */}
 								</section>
 							</div>
 						</form>

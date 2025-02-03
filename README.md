@@ -5,6 +5,7 @@
 ```
 - React
 - Typescript
+- Redux
 - Lucide
 - Axios
 ```

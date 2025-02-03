@@ -17,7 +17,8 @@ export function SignIn() {
 			session({ email, password });
 			navigate("/");
 		} catch (error) {
-			alert("Erro ao realizar login. Por favor, tente novamente.");
+			// alert("Erro ao realizar login. Por favor, tente novamente.");
+			console.log(error);
 		}
 	}
 

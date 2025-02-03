@@ -13,10 +13,11 @@ export interface HandleSubmitId {
 
 export interface AuthData {
 	user?: {
-		id: string;
+		id?: string;
 		name: string;
 	};
-	token?: string;
+	token: string;
+	auth?: (user: string, token: string) => void;
 }
 
 export interface FormDataType {
@@ -36,6 +37,11 @@ export interface ContextType extends Pick<AuthData, "user"> {
 export interface AuthProviderType {
 	children: ReactNode;
 }
+
+export type initialType = {
+	user: null;
+	token: null;
+};
 
 export interface FavoriteProviderType {
 	children: ReactNode;
