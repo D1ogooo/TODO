@@ -8,40 +8,36 @@ import { logout, setAuth } from "../redux/reducers/authReducer";
 const AuthContext = createContext({} as ContextType);
 
 function AuthProvider({ children }: AuthProviderType) {
-	const { user, token } = useSelector((state) => state.auth);
-	const dispatch = useDispatch();
+ const { user, token } = useSelector((state) => state.auth);
+ const dispatch = useDispatch();
 
-	useEffect(() => {
-		const user = localStorage.getItem("@TODO:user");
-		const token = localStorage.getItem("@TODO:token");
+ useEffect(() => {
+  const user = localStorage.getItem("@TODO:user");
+  const token = localStorage.getItem("@TODO:token");
 
-		if (user && token) {
-			api.defaults.headers.authorization = `Bearer ${token}`;
-			dispatch(setAuth({ user, token }));
-		}
-	}, []);
+  if (user && token) {
+    api.defaults.headers.authorization = `Bearer ${token}`;
+    dispatch(setAuth({ user, token }));
+   }
+ }, []);
 
-	async function session({ email, password }: LoginType) {
-		try {
-			const res = await api.post("/users/session", { email, password });
-			const { user, token } = res.data;
+async function session({ email, password }: LoginType) {
+ try {
+  const res = await api.post("/users/session", { email, password });
+  const { user, token } = res.data;
 
-			localStorage.setItem("@TODO:user", JSON.stringify(user));
-			localStorage.setItem("@TODO:token", token);
+  localStorage.setItem("@TODO:user", JSON.stringify(user));
+  localStorage.setItem("@TODO:token", token);
 
-			api.defaults.headers.authorization = `Bearer ${token}`;
-			dispatch(setAuth({ user, token }));
-		} catch (error) {
-			const axiosError = error as AxiosError;
-			const errorMessage =
-				axiosError.response?.data &&
-				typeof axiosError.response.data === "object" &&
-				"error" in axiosError.response.data
-					? (axiosError.response.data as { error: string }).error
-					: "Erro desconhecido";
-			return alert(errorMessage);
-		}
-	}
+  api.defaults.headers.authorization = `Bearer ${token}`;
+  dispatch(setAuth({ user, token }));
+ } catch (error) {
+  const axiosError = error as AxiosError;
+  const errorMessage = axiosError.response?.data && typeof axiosError.response.data === "object" && "error" in axiosError.response.data ? 
+   (axiosError.response.data as { error: string }).error: "Erro desconhecido";
+  return alert(errorMessage);
+ }
+}
 
 	async function register({ name, email, password }: RegisterType) {
 		try {
