@@ -1,11 +1,5 @@
-import { useState, useEffect, useContext, createContext } from "react";
-import type {
-	AuthProviderType,
-	AuthData,
-	LoginType,
-	RegisterType,
-	ContextType,
-} from "../@types/types";
+import { useEffect, useContext, createContext } from "react";
+import type { AuthProviderType, LoginType, RegisterType, ContextType } from "../@types/types";
 import { api } from "../service/api";
 import type { AxiosError } from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +8,6 @@ import { logout, setAuth } from "../redux/reducers/authReducer";
 const AuthContext = createContext({} as ContextType);
 
 function AuthProvider({ children }: AuthProviderType) {
-	// const [data, setData] = useState<AuthData>({});
 	const { user, token } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 
@@ -24,7 +17,6 @@ function AuthProvider({ children }: AuthProviderType) {
 
 		if (user && token) {
 			api.defaults.headers.authorization = `Bearer ${token}`;
-			// setData({ user: JSON.parse(user), token });
 			dispatch(setAuth({ user, token }));
 		}
 	}, []);
@@ -60,12 +52,11 @@ function AuthProvider({ children }: AuthProviderType) {
 	}
 
 	async function loggout() {
-		// parte da authenticação, a outra parte fica no reducer
 		localStorage.removeItem("@TODO:user");
 		localStorage.removeItem("@TODO:token");
 		api.defaults.headers.authorization = "";
 
-		dispatch(logout()); // exportado dentro do meu reducer de authenticação
+		dispatch(logout());
 	}
 
 	return (
