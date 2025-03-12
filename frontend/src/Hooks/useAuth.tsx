@@ -39,34 +39,26 @@ async function session({ email, password }: LoginType) {
  }
 }
 
-	async function register({ name, email, password }: RegisterType) {
-		try {
-			await api.post("/users/create", { name, email, password });
-		} catch (error) {
-			console.log(error);
-		}
-	}
+async function register({ name, email, password }: RegisterType) {
+ try {
+  await api.post("/users/create", { name, email, password });
+ } catch (error) {
+  console.log(error);
+ }
+}
 
-	async function loggout() {
-		localStorage.removeItem("@TODO:user");
-		localStorage.removeItem("@TODO:token");
-		api.defaults.headers.authorization = "";
+async function loggout() {
+ localStorage.removeItem("@TODO:user");
+ localStorage.removeItem("@TODO:token");
+ api.defaults.headers.authorization = "";
+ dispatch(logout());
+}
 
-		dispatch(logout());
-	}
-
-	return (
-		<AuthContext.Provider
-			value={{
-				user,
-				session,
-				register,
-				loggout,
-			}}
-		>
-			{children}
-		</AuthContext.Provider>
-	);
+return (
+  <AuthContext.Provider value={{ user, session, register, loggout }}>
+   {children}
+  </AuthContext.Provider>
+ );
 }
 
 function useAuth() {
